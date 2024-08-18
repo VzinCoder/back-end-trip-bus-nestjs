@@ -1,8 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreateRouteDTO } from './dto/createRoute.dto';
+import { CreateRouteDto } from './dto/createRoute.dto';
+import { RoutesService } from './routes.service';
 
 @Controller('routes')
 export class RoutesController {
+
+    constructor(private readonly routesService: RoutesService) {};
 
     @Get('get-all-routes')
     async getAllRoutes() {
@@ -10,7 +13,7 @@ export class RoutesController {
     };
 
     @Post('create-route')
-    async createRoute(@Body() createRoute: CreateRouteDTO) {
-        return createRoute;
+    async createRoute(@Body() createRoute: CreateRouteDto) {
+        return this.routesService.createRoute(createRoute);
     };
 };
