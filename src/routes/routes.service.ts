@@ -18,4 +18,8 @@ export class RoutesService {
 
         return route;
     };
+
+    async getAllRoutes(): Promise<Routes[]> {
+        return this.routes;  
+    } 
 };
