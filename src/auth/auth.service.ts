@@ -1,8 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import bcrypt from 'bcrypt';
-import { access } from 'fs';
+import {compareSync} from 'bcrypt';
+import { SignInResponseAuthDto } from './dto/sigIn-response-auth.dto';
+import { SignInAuthDto } from './dto/sigIn-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,11 +13,11 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
-    async signIn(username: string, pass: string): Promise<any> {
-        const user = await this.userService.findOne(username);
+    async signIn(signInAuthDto:SignInAuthDto): Promise<SignInResponseAuthDto> {
+        const user = await this.userService.findOne(signInAuthDto.email);
 
-        if (!user || bcrypt.compareSync(pass, user.password)) {
-            throw new UnauthorizedException();
+        if (!user || !compareSync(signInAuthDto.password, user.password)) {
+            throw new UnauthorizedException('Invalid email or password.')
         }
 
         const payload = {
