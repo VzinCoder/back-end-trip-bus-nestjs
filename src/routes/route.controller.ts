@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateRouteDto } from './dto/createRoute.dto';
-import { Routes } from './interface/routes.interface';
-import { RoutesService } from './routes.service';
+import { RouteEntity } from './interface/route.interface';
+import { RouteService } from './route.service';
 
 @Controller('routes')
-export class RoutesController {
+export class RouteController {
 
-    constructor(private readonly routesService: RoutesService) {};
+    constructor(private readonly routesService: RouteService) {};
 
     @Get('get-all-routes')
-    async getAllRoutes(): Promise<Routes[]> {
+    async getAllRoutes(): Promise<RouteEntity[]> {
         return this.routesService.getAllRoutes();
     };
 
