@@ -1,19 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateRouteDto } from './dto/createRoute.dto';
-import { RouteEntity } from './interface/route.interface';
+import { RouteEntity } from './entities/route.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RouteService {
-    async createRoute(createRouteDto: CreateRouteDto): Promise<RouteEntity> {
-        const route: RouteEntity = {
-            ...createRouteDto,
-            id: 1
-        };
+    constructor(
+        @Inject('ROUTE_REPOSITORY')
+        private readonly routeRepository: Repository<RouteEntity>
+    ) {}
 
-        return route;
+    async createRoute(createRouteDto: CreateRouteDto): Promise<RouteEntity> {
+        return this.routeRepository.save({
+            ...createRouteDto,
+        });
     };
 
     async getAllRoutes(): Promise<RouteEntity[]> {
-        return [];  
+        return this.routeRepository.find();  
     } 
 };
