@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'route' })
 export class RouteEntity {
-    @PrimaryGeneratedColumn('rowid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ name: 'user', nullable: false })

@@ -15,7 +15,7 @@ export class AuthService {
 
     async signIn(signInAuthDto:SignInAuthDto): Promise<SignInResponseAuthDto> {
         const user = await this.userService.findOne({email:signInAuthDto.email});
-
+        
         if (!user || !compareSync(signInAuthDto.password, user.password)) {
             throw new UnauthorizedException('Invalid email or password.')
         }

@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateResponseUserDto } from './dto/create-response-user.dto';
 import { hashSync } from 'bcrypt';
+import { notStrictEqual } from 'assert';
 
 @Injectable()
 export class UserService {
