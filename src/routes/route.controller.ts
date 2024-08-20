@@ -12,15 +12,15 @@ export class RouteController {
 
     constructor(private readonly routesService: RouteService) {};
 
-    @Get('get-all-routes')
-    @UseGuards(AuthGuard,RolesGuard)
+    // @Get('get-all-routes')
+    // @UseGuards(AuthGuard,RolesGuard)
     @Roles(Role.ENTERPRISE)
     async getAllRoutes(): Promise<RouteEntity[]> {
         return this.routesService.getAllRoutes();
     };
 
-    @Post('create-route')
-    @UseGuards(AuthGuard,RolesGuard)
+    // @Post('create-route')
+    // @UseGuards(AuthGuard,RolesGuard)
     @Roles(Role.ENTERPRISE)
     async createRoute(@Body() createRoute: CreateRouteDto) {
         return this.routesService.createRoute(createRoute);
