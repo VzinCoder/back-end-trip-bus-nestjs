@@ -1,23 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { BusModule } from './bus/bus.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-<<<<<<< HEAD
+import { DatabaseModule } from './database/database.module';
 import { RouteModule } from './routes/route.module';
 import { TravelModule } from './travel/travel.module';
-
-@Module({
-  imports: [
-    BusModule, 
-    UserModule, 
-    AuthModule, 
-    RouteModule, TravelModule
-  ],
-  controllers: [AuthController],
-  providers: [AuthService],
-=======
-import { DatabaseModule } from './database/database.module';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -25,9 +13,9 @@ import { ConfigModule } from '@nestjs/config';
     BusModule,
     UserModule,
     AuthModule,
+    RouteModule, TravelModule,
     ConfigModule.forRoot({isGlobal:true})
   ],
   providers: [],
->>>>>>> master
 })
 export class AppModule {}
